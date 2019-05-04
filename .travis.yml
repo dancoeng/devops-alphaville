@@ -11,5 +11,5 @@ install:
   - pip install -r requirements_dev.txt
   - pip install pytest-cov
 script:
-  - pytest src/test_*.py --cov=handler
+  - pytest src/test_*.py --cov=handler --cov-fail-under=100
   - pycodestyle src/*py --ignore=E501
