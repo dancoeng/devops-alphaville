@@ -13,3 +13,4 @@ install:
 script:
   - pytest src/test_*.py
   - pycodestyle src/*py --ignore=E501
+  - pytest --cov=devops-alphaville/
