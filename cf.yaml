@@ -61,6 +61,28 @@ Resources:
                 requestTemplates:
                   application/json: "{\"statusCode\": 200}"
                 type: mock
-  geohash:
+          StageName: LIVE
+   geohash:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName:
+        Fn::Join:
+         - '-'
+         - - Ref: AWS::StackName
+           - geohash
+      Handler: handler.handler
+      CodeUri: ./src
+      Runtime: python3.7
+      MemorySize: 128
+      Timeout: 3
+      Role: !ImportValue lambdaRole
+      Events:
+        geohash:
+          Type: Api
+          Properties:
+            Path: /geohash
+            Method: get
+            RestApiId: !Ref API
+Outputs:
+  API:
+    Value: !Ref API.Stage
